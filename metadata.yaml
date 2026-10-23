@@ -4,7 +4,7 @@ tier: capability          # primitive | capability | blueprint
 maturity: experimental    # experimental | stable | deprecated
 description: Cloud Storage bucket with uniform access, public access prevention, optional versioning, lifecycle, CORS and IAM
 owners: [platform]
-upstream: null            # e.g. "terraform-aws-modules/s3-bucket/aws 5.17.0"
-pairs_with: null          # e.g. "terraform-google-gcs-bucket"
+upstream: "terraform-google-modules/cloud-storage/google//modules/simple_bucket 12.4.1"
+pairs_with: terraform-aws-s3-bucket
 registry_name: terraform-google-gcs-bucket
 deprecated: null          # { removal: YYYY-MM-DD, replacement: <repo> }

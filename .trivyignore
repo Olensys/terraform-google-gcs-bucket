@@ -1,1 +1,7 @@
 # One ID per line, each with a justification comment.
+# Customer-managed encryption is opt-in through kms_key_name; the default is Google-managed encryption.
+AVD-GCP-0066
+# Access logging needs a caller-owned log bucket, which this module does not create.
+AVD-GCP-0077
+# Versioning is opt-in through versioning_enabled and defaults to off.
+AVD-GCP-0078
