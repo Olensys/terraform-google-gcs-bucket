@@ -6,6 +6,7 @@
 
 - normalise `context.extra_tags` keys and values to valid GCP label syntax (lowercase, `[^a-z0-9_-]` replaced by `-`, 63 characters); `labels` are applied verbatim and win
 - `versioning_enabled` is now `bool` with `default = null`, resolved as `coalesce(var.versioning_enabled, var.context.environment == "prod")`
+
 ### Tests
 
 - prod default on, dev default off and explicit override cases for versioning
