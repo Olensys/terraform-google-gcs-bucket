@@ -1,5 +1,7 @@
 locals {
-  labels = merge(var.context.extra_tags, var.labels)
+  extra_labels = { for k, v in var.context.extra_tags :
+  substr(replace(lower(k), "/[^a-z0-9_-]/", "-"), 0, 63) => substr(replace(lower(v), "/[^a-z0-9_-]/", "-"), 0, 63) }
+  labels = merge(local.extra_labels, var.labels)
 
   # S3-shaped lifecycle rules mapped to GCS rules: current-object expiry, noncurrent expiry, multipart abort.
   lifecycle_rules = flatten([
@@ -54,7 +56,7 @@ locals {
   hardening = {
     uniform_bucket_level_access = true
     public_access_prevention    = "enforced"
-    versioning                  = var.versioning_enabled
+    versioning                  = coalesce(var.versioning_enabled, var.context.environment == "prod")
   }
 }
 

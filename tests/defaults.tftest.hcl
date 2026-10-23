@@ -29,7 +29,62 @@ run "test_versioning_off_default" {
   # SMOKE: asserts the versioning value passed to the upstream module; the applied bucket attribute is proven by complete.tftest.hcl.
   assert {
     condition     = output.hardening.versioning == false
-    error_message = "versioning must default to off."
+    error_message = "versioning must default to off outside prod."
+  }
+}
+
+run "test_versioning_prod_default" {
+  command = plan
+
+  variables {
+    context = {
+      organization = "olensys"
+      environment  = "prod"
+      application  = "example"
+      owner        = "platform"
+      cost_center  = "eng"
+    }
+  }
+
+  # SMOKE: asserts the versioning value passed to the upstream module; the applied bucket attribute is proven by complete.tftest.hcl.
+  assert {
+    condition     = output.hardening.versioning == true
+    error_message = "versioning must default to on in prod."
+  }
+}
+
+run "test_versioning_explicit_override" {
+  command = plan
+
+  variables {
+    versioning_enabled = true
+  }
+
+  # SMOKE: asserts the versioning value passed to the upstream module; the applied bucket attribute is proven by complete.tftest.hcl.
+  assert {
+    condition     = output.hardening.versioning == true
+    error_message = "explicit versioning_enabled = true must win in a non-prod environment."
+  }
+}
+
+run "test_versioning_explicit_off_in_prod" {
+  command = plan
+
+  variables {
+    versioning_enabled = false
+    context = {
+      organization = "olensys"
+      environment  = "prod"
+      application  = "example"
+      owner        = "platform"
+      cost_center  = "eng"
+    }
+  }
+
+  # SMOKE: asserts the versioning value passed to the upstream module; the applied bucket attribute is proven by complete.tftest.hcl.
+  assert {
+    condition     = output.hardening.versioning == false
+    error_message = "explicit versioning_enabled = false must win in prod."
   }
 }
 
@@ -133,7 +188,7 @@ run "test_tags_contract" {
       application  = "example"
       owner        = "platform"
       cost_center  = "eng"
-      extra_tags   = { owner = "y", team = "z" }
+      extra_tags   = { Owner = "y", Team = "Core Team" }
     }
   }
 
@@ -142,7 +197,7 @@ run "test_tags_contract" {
     error_message = "var.labels must win over context.extra_tags."
   }
   assert {
-    condition     = output.labels.team == "z"
-    error_message = "context.extra_tags must be merged."
+    condition     = output.labels.team == "core-team"
+    error_message = "context.extra_tags must be merged and normalised."
   }
 }

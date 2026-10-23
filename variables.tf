@@ -45,9 +45,9 @@ variable "location" {
 }
 
 variable "versioning_enabled" {
-  description = "Whether object versioning is enabled."
+  description = "Whether object versioning is enabled. Null defaults to true in prod and false elsewhere."
   type        = bool
-  default     = false
+  default     = null
 }
 
 variable "lifecycle_rules" {
