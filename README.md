@@ -1,6 +1,6 @@
-# __NAME__
+# terraform-google-gcs-bucket
 
-__DESCRIPTION__
+Cloud Storage bucket with uniform access, public access prevention, optional versioning, lifecycle, CORS and IAM
 
 ## Opinions
 
@@ -10,7 +10,7 @@ __DESCRIPTION__
 
 ```hcl
 module "this" {
-  source = "git::https://github.com/Olensys/__NAME__.git?ref=v1.0.0"
+  source = "git::https://github.com/Olensys/terraform-google-gcs-bucket.git?ref=v1.0.0"
 
   name = "example"
   context = {
