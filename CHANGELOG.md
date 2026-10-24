@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/Olensys/terraform-google-gcs-bucket/compare/v1.1.1...v1.1.2) (2026-10-24)
+
+
+### Bug Fixes
+
+* **examples:** unique application slug so concurrent integration runs do not collide ([#3](https://github.com/Olensys/terraform-google-gcs-bucket/issues/3)) ([77f9772](https://github.com/Olensys/terraform-google-gcs-bucket/commit/77f977228a50658fb021b624adff15aa006323f5))
+
 ## [1.1.1](https://github.com/Olensys/terraform-google-gcs-bucket/compare/v1.1.0...v1.1.1) (2026-10-24)
 
 
