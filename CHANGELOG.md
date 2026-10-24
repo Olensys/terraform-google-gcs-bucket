@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/Olensys/terraform-google-gcs-bucket/compare/v1.1.0...v1.1.1) (2026-10-24)
+
+
+### Bug Fixes
+
+* run integration on change and weekly instead of nightly ([57109f4](https://github.com/Olensys/terraform-google-gcs-bucket/commit/57109f45b1d2d3cece8b193b2168d4ca635ae5b7))
+
 ## 1.1.0
 
 ### Fixes
