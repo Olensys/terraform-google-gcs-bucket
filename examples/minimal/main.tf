@@ -14,13 +14,13 @@ variable "project_id" {
 module "this" {
   source = "../../"
 
-  name       = "olensys-example-bucket"
+  name       = "olensys-test-gcs"
   project_id = var.project_id
   location   = "US"
   context = {
     organization = "olensys"
     environment  = "test"
-    application  = "example"
+    application  = "gcs"
     owner        = "platform"
     cost_center  = "eng"
   }
