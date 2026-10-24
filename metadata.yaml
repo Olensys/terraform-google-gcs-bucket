@@ -1,7 +1,7 @@
 name: terraform-google-gcs-bucket
 cloud: google          # aws | google | common
 tier: capability          # primitive | capability | blueprint
-maturity: experimental    # experimental | stable | deprecated
+maturity: stable    # experimental | stable | deprecated
 description: Cloud Storage bucket with uniform access, public access prevention, optional versioning, lifecycle, CORS and IAM
 owners: [platform]
 upstream: "terraform-google-modules/cloud-storage/google//modules/simple_bucket 12.4.1"
