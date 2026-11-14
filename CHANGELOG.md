@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/Olensys/terraform-google-gcs-bucket/compare/v1.1.2...v1.2.0) (2026-11-14)
+
+
+### Features
+
+* add uniform_bucket_level_access, public_access_prevention and soft_delete_retention_seconds inputs ([#6](https://github.com/Olensys/terraform-google-gcs-bucket/issues/6)) ([8cb90be](https://github.com/Olensys/terraform-google-gcs-bucket/commit/8cb90be18db1e852ec2b987223695171ad0e9b18))
+
 ## [1.1.2](https://github.com/Olensys/terraform-google-gcs-bucket/compare/v1.1.1...v1.1.2) (2026-10-24)
 
 
