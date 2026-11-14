@@ -91,6 +91,32 @@ variable "force_destroy" {
   default     = false
 }
 
+variable "uniform_bucket_level_access" {
+  description = "Whether uniform bucket-level access is on (object ACLs disabled, IAM only). Default true is the library's secure default; false is an explicit opt-out that re-enables ACLs, meant for adopting an existing bucket that still uses them."
+  type        = bool
+  default     = true
+}
+
+variable "public_access_prevention" {
+  description = "Public access prevention: enforced (default, the bucket can never be made public) or inherited (the organisation policy decides, so objects may be made public). inherited is an explicit opt-out meant for adopting an existing bucket."
+  type        = string
+  default     = "enforced"
+  validation {
+    condition     = contains(["enforced", "inherited"], var.public_access_prevention)
+    error_message = "public_access_prevention must be enforced or inherited."
+  }
+}
+
+variable "soft_delete_retention_seconds" {
+  description = "Soft delete retention in seconds. Null (default) leaves the provider default (currently 7 days); 0 disables soft delete; otherwise 604800 (7 days) to 7776000 (90 days)."
+  type        = number
+  default     = null
+  validation {
+    condition     = var.soft_delete_retention_seconds == null ? true : (var.soft_delete_retention_seconds == 0 || (var.soft_delete_retention_seconds >= 604800 && var.soft_delete_retention_seconds <= 7776000))
+    error_message = "soft_delete_retention_seconds must be null, 0, or between 604800 and 7776000."
+  }
+}
+
 variable "labels" {
   description = "Labels merged onto the bucket, applied last. Callers must already normalise them for GCP."
   type        = map(string)

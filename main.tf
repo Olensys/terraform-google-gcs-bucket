@@ -53,10 +53,13 @@ locals {
     ]
   ])
 
+  # Secure defaults; each one is a plain input so an existing bucket can be
+  # imported with its live settings and tightened afterwards.
   hardening = {
-    uniform_bucket_level_access = true
-    public_access_prevention    = "enforced"
-    versioning                  = coalesce(var.versioning_enabled, var.context.environment == "prod")
+    uniform_bucket_level_access   = var.uniform_bucket_level_access
+    public_access_prevention      = var.public_access_prevention
+    versioning                    = coalesce(var.versioning_enabled, var.context.environment == "prod")
+    soft_delete_retention_seconds = var.soft_delete_retention_seconds
   }
 }
 
@@ -79,4 +82,5 @@ module "this" {
   cors                     = local.cors
   iam_members              = local.iam_members
   encryption               = var.kms_key_name == null ? null : { default_kms_key_name = var.kms_key_name }
+  soft_delete_policy       = { retention_duration_seconds = local.hardening.soft_delete_retention_seconds }
 }
