@@ -34,6 +34,6 @@ output "cors_config" {
 }
 
 output "hardening" {
-  description = "Hardening values passed to the bucket: uniform_bucket_level_access, public_access_prevention and versioning. Null when create is false."
+  description = "Hardening values passed to the bucket: uniform_bucket_level_access, public_access_prevention, versioning and soft_delete_retention_seconds. Null when create is false."
   value       = var.create ? local.hardening : null
 }
